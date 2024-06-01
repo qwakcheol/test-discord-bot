@@ -280,6 +280,63 @@ class General(commands.Cog, name="general"):
                     )
                 await context.send(embed=embed)
 
+    @commands.hybrid_command(
+        name="attendance",
+        description="Daily attendance"
+    )
+    async def attendance(self, context: Context) -> None:
+        """
+        Test function for attendance
+        """
+        mileage = 10
+        embed = discord.Embed(
+            title="Mileage earned!",
+            description=f"You've gained {mileage} mileage points!",
+            color=0xBEBEFE
+        )
+        await context.send(embed=embed)
+
+    @commands.hybrid_group(
+        name="buy",
+        description="Spend mileage points to buy items"
+    )
+    async def buy(self, context: Context) -> None:
+        """
+        Deduct mileage points from DB and sell user items
+        """
+        if context.invoked_subcommand is None:
+            embed = discord.Embed(
+                description="Please specify an item you'd like to purchase.",
+                color=0xE02B2B,
+            )
+            await context.send(embed=embed)
+
+    @buy.command(
+        name="coffee",
+        description="Buy coffee for 10 mileage points"
+    )
+    async def coffee(self, context: Context) -> None:
+        coffee = 10
+        embed = discord.Embed(
+            title="Here's your coffee!",
+            description=f"You've bought coffee using {coffee} mileage points!",
+            color=0xBEBEFE
+        )
+        await context.send(embed=embed)
+
+    @buy.command(
+        name="iffy",
+        description="Buy Iffy's time for 100 mileage points"
+    )
+    async def iffy(self, context: Context) -> None:
+        iffy = 100
+        embed = discord.Embed(
+            title="Here's Iffy's time!",
+            description=f"You've bought Iffy's time using {iffy} mileage points!",
+            color=0xBEBEFE
+        )
+        await context.send(embed=embed)
+
 
 async def setup(bot) -> None:
     await bot.add_cog(General(bot))
